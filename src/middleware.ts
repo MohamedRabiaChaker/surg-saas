@@ -37,15 +37,15 @@ export async function middleware(req: NextRequest) {
         const { payload } = await jwtVerify(token, secret);
         console.log(`Decoded token: ${JSON.stringify(payload)}`);
 
-        // Example route → required role mapping
         const routeRoles: Record<string, string> = {
             '/dashboard': 'user',
             '/admin': 'admin',
-            '/superadmin': 'superadmin',
+            '/line-chart': 'superadmin',
         };
 
         for (const [route, requiredRole] of Object.entries(routeRoles)) {
             if (pathname.startsWith(route) && !hasRequiredRole(payload.role as string, requiredRole)) {
+                console.log(`Checking route: ${route} with required role: ${requiredRole}`);
                 return NextResponse.redirect(new URL('/unauthorized', req.url));
             }
         }

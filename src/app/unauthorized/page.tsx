@@ -3,24 +3,24 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export default function NotFound() {
+export default function Unauthorized() {
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen p-6 overflow-hidden z-1">
       <GridShape />
       <div className="mx-auto w-full max-w-[242px] text-center sm:max-w-[472px]">
         <h1 className="mb-8 font-bold text-gray-800 text-title-md dark:text-white/90 xl:text-title-2xl">
-          ERROR
+                    UNAUTHORIZED
         </h1>
 
         <Image
-          src="/images/error/404.svg"
-          alt="404"
+          src="/images/error/401.svg"
+          alt="401"
           className="dark:hidden"
           width={472}
           height={152}
         />
         <Image
-          src="/images/error/404-dark.svg"
+          src="/images/error/401-dark.svg"
           alt="404"
           className="hidden dark:block"
           width={472}
@@ -45,3 +45,4 @@ export default function NotFound() {
     </div>
   );
 }
+

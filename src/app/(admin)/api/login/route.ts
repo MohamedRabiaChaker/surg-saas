@@ -7,7 +7,7 @@ export const dummyUser = {
     id: '1',
     email: 'test@example.com',
     passwordHash: '$2b$12$oCxBC5d9lNvHux/RvvAKZupMt5Sn8D3TYIVPCch3TzzbYQaGC10Ea', // "password"
-    role: 'superadmin' // can be 'superadmin', 'admin', or 'user'
+    role: 'user' // can be 'superadmin', 'admin', or 'user'
 };
 
 export async function POST(req: Request) {
