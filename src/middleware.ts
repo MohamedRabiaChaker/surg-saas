@@ -1,7 +1,6 @@
-// middleware.ts
 import { NextResponse } from 'next/server';
-import jwt from 'jsonwebtoken';
 import type { NextRequest } from 'next/server';
+import { jwtVerify } from 'jose';
 
 const roleHierarchy = ['user', 'admin', 'superadmin'];
 
@@ -9,8 +8,8 @@ function hasRequiredRole(userRole: string, requiredRole: string) {
     return roleHierarchy.indexOf(userRole) >= roleHierarchy.indexOf(requiredRole);
 }
 
-export function middleware(req: NextRequest) {
-    const publicPaths = ['/unauthorized', '/signin', '/signup',];
+export async function middleware(req: NextRequest) {
+    const publicPaths = ['/unauthorized', '/signin', '/signup'];
     const { pathname } = req.nextUrl;
     console.log(`Middleware triggered for path: ${pathname}`);
 
@@ -29,25 +28,31 @@ export function middleware(req: NextRequest) {
         console.log('No token found, redirecting to login');
         return NextResponse.redirect(new URL('/signin', req.url));
     }
+    console.log('Token found, verifying...');
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { role: string };
+        // jose expects the secret as a Uint8Array or CryptoKey
+        const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
+
+        const { payload } = await jwtVerify(token, secret);
+        console.log(`Decoded token: ${JSON.stringify(payload)}`);
 
         // Example route → required role mapping
         const routeRoles: Record<string, string> = {
             '/dashboard': 'user',
             '/admin': 'admin',
-            '/superadmin': 'superadmin'
+            '/superadmin': 'superadmin',
         };
 
         for (const [route, requiredRole] of Object.entries(routeRoles)) {
-            if (pathname.startsWith(route) && !hasRequiredRole(decoded.role, requiredRole)) {
+            if (pathname.startsWith(route) && !hasRequiredRole(payload.role as string, requiredRole)) {
                 return NextResponse.redirect(new URL('/unauthorized', req.url));
             }
         }
 
         return NextResponse.next();
-    } catch {
+    } catch (error) {
+        console.error('Token verification failed:', error);
         return NextResponse.redirect(new URL('/signin', req.url));
     }
 }
@@ -57,3 +62,4 @@ export const config = {
         '/((?!api|trpc|_next/static|_next/image|images|assets|favicon.ico|sw.js).*)',
     ],
 };
+

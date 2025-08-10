@@ -6,14 +6,15 @@ import jwt from 'jsonwebtoken';
 export const dummyUser = {
     id: '1',
     email: 'test@example.com',
-    passwordHash: '$2b$12$uPhf37pMXhmy5iPReKEl6uHq1f38N40dghq8/Id1ZSlvU3HZog9wK', // "password"
-    role: 'admin' // can be 'superadmin', 'admin', or 'user'
+    passwordHash: '$2b$12$oCxBC5d9lNvHux/RvvAKZupMt5Sn8D3TYIVPCch3TzzbYQaGC10Ea', // "password"
+    role: 'superadmin' // can be 'superadmin', 'admin', or 'user'
 };
 
 export async function POST(req: Request) {
     const { email, password } = await req.json();
 
     if (email !== dummyUser.email) {
+
         return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
 

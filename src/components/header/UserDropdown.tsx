@@ -1,12 +1,13 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
 import React, { useState } from "react";
 import { Dropdown } from "../ui/dropdown/Dropdown";
 import { DropdownItem } from "../ui/dropdown/DropdownItem";
+import { useRouter } from "next/navigation";
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
+const router = useRouter();
 
 function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
   e.stopPropagation();
@@ -16,6 +17,17 @@ function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
   function closeDropdown() {
     setIsOpen(false);
   }
+
+    async function onClickSignOut() {
+        const res = await fetch("/api/logout", {
+            method: "POST",
+        });
+        console.log("Logging out user, clearing cookies");
+        if (res.ok) {
+            console.log("Logged out successfully");
+            router.push("/signin");
+        }
+    }
   return (
     <div className="relative">
       <button
@@ -144,9 +156,9 @@ function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
             </DropdownItem>
           </li>
         </ul>
-        <Link
-          href="/signin"
+        <button
           className="flex items-center gap-3 px-3 py-2 mt-3 font-medium text-gray-700 rounded-lg group text-theme-sm hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
+            onClick={onClickSignOut}
         >
           <svg
             className="fill-gray-500 group-hover:fill-gray-700 dark:group-hover:fill-gray-300"
@@ -164,7 +176,7 @@ function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
             />
           </svg>
           Sign out
-        </Link>
+        </button>
       </Dropdown>
     </div>
   );
