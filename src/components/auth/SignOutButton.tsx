@@ -1,9 +1,6 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 export default function SignOutButton() {
-    const router = useRouter();
-
     async function onClickSignOut() {
         const res = await fetch("/api/logout", {
             method: "POST",
@@ -11,17 +8,14 @@ export default function SignOutButton() {
         console.log("Logging out user, clearing cookies");
         if (res.ok) {
             console.log("Logged out successfully");
-            router.push("/signin");
         }
     }
     return (
         <>
             <Link
-                className="group text-theme-sm flex items-center gap-3 rounded-lg bg-blue-300 px-3 py-2 font-medium text-white hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
+                className="group text-theme-sm flex items-center gap-3 rounded-lg bg-indigo-600 px-3 py-2 font-medium text-white hover:bg-indigo-400 hover:text-indigo-600 dark:bg-indigo-600 dark:text-white dark:hover:bg-indigo-400 dark:hover:text-gray-300"
                 href="/signin"
-                onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
+                onClick={() => {
                     onClickSignOut();
                 }}
             >

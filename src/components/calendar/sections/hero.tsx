@@ -3,6 +3,7 @@ import {
     LockClosedIcon,
     ServerIcon,
 } from "@heroicons/react/20/solid";
+import Image from "next/image";
 
 const features = [
     {
@@ -33,16 +34,15 @@ export default function Example() {
                     <div className="lg:pt-4 lg:pr-8">
                         <div className="lg:max-w-lg">
                             <h2 className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">
-                                Deploy faster
+                                lorem ipsum
                             </h2>
                             <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
-                                A better workflow
+                                Surgery Training Simplified
                             </p>
                             <p className="mt-6 text-lg/8 text-gray-700 dark:text-gray-300">
-                                Lorem ipsum, dolor sit amet consectetur
-                                adipisicing elit. Maiores impedit perferendis
-                                suscipit eaque, iste dolor cupiditate blanditiis
-                                ratione.
+                                Streamline your surgical training with our
+                                comprehensive platform, designed to enhance
+                                learning and improve patient outcomes.
                             </p>
                             <dl className="mt-10 max-w-xl space-y-8 text-base/7 text-gray-600 lg:max-w-none dark:text-gray-400">
                                 {features.map((feature) => (
@@ -65,19 +65,12 @@ export default function Example() {
                             </dl>
                         </div>
                     </div>
-                    <img
-                        alt="Product screenshot"
-                        src="https://tailwindcss.com/plus-assets/img/component-images/dark-project-app-screenshot.png"
-                        width={2432}
-                        height={1442}
-                        className="w-3xl max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 not-dark:hidden sm:w-228 md:-ml-4 lg:-ml-0 dark:ring-white/10"
-                    />
-                    <img
-                        alt="Product screenshot"
-                        src="https://tailwindcss.com/plus-assets/img/component-images/project-app-screenshot.png"
-                        width={2432}
-                        height={1442}
-                        className="w-3xl max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-228 md:-ml-4 lg:-ml-0 dark:hidden dark:ring-white/10"
+                    <Image
+                        alt="landing Image"
+                        src="/images/brand/landing.png"
+                        width={800}
+                        height={800}
+                        className="max-w-2xl rounded-full shadow-xl ring-1 ring-gray-400/10 sm:w-228 md:-ml-4 lg:-ml-0"
                     />
                 </div>
             </div>
