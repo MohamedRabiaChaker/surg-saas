@@ -30,35 +30,36 @@ const navItems: NavItem[] = [
   {
     icon: <GridIcon />,
     name: "Dashboard",
-    subItems: [{ name: "Ecommerce", path: "/", pro: false }],
+    subItems: [{ name: "Training Overview", path: "/", pro: false }],
   },
   {
     icon: <CalenderIcon />,
-    name: "Calendar",
+    name: "Training Schedule",
     path: "/calendar",
   },
   {
     icon: <UserCircleIcon />,
-    name: "User Profile",
+    name: "Profile",
     path: "/profile",
   },
-
   {
-    name: "Forms",
+    name: "Training Sessions",
     icon: <ListIcon />,
-    subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
+    subItems: [{ name: "Active Sessions", path: "/form-elements", pro: false }],
   },
   {
-    name: "Tables",
+    name: "Progress Reports",
     icon: <TableIcon />,
-    subItems: [{ name: "Basic Tables", path: "/basic-tables", pro: false }],
+    subItems: [
+      { name: "Performance Analytics", path: "/basic-tables", pro: false },
+    ],
   },
   {
-    name: "Pages",
+    name: "Resources",
     icon: <PageIcon />,
     subItems: [
-      { name: "Blank Page", path: "/blank", pro: false },
-      { name: "404 Error", path: "/error-404", pro: false },
+      { name: "Study Materials", path: "/blank", pro: false },
+      { name: "Help Center", path: "/error-404", pro: false },
     ],
   },
 ];
@@ -66,27 +67,27 @@ const navItems: NavItem[] = [
 const othersItems: NavItem[] = [
   {
     icon: <PieChartIcon />,
-    name: "Charts",
+    name: "Analytics",
     subItems: [
-      { name: "Line Chart", path: "/line-chart", pro: false },
-      { name: "Bar Chart", path: "/bar-chart", pro: false },
+      { name: "Performance Charts", path: "/line-chart", pro: false },
+      { name: "Progress Reports", path: "/bar-chart", pro: false },
     ],
   },
   {
     icon: <BoxCubeIcon />,
-    name: "UI Elements",
+    name: "Training Tools",
     subItems: [
-      { name: "Alerts", path: "/alerts", pro: false },
-      { name: "Avatar", path: "/avatars", pro: false },
-      { name: "Badge", path: "/badge", pro: false },
-      { name: "Buttons", path: "/buttons", pro: false },
-      { name: "Images", path: "/images", pro: false },
-      { name: "Videos", path: "/videos", pro: false },
+      { name: "Simulations", path: "/alerts", pro: false },
+      { name: "Procedures", path: "/avatars", pro: false },
+      { name: "Assessments", path: "/badge", pro: false },
+      { name: "Practice Tests", path: "/buttons", pro: false },
+      { name: "Medical Images", path: "/images", pro: false },
+      { name: "Training Videos", path: "/videos", pro: false },
     ],
   },
   {
     icon: <PlugInIcon />,
-    name: "Authentication",
+    name: "Account",
     subItems: [
       { name: "Sign In", path: "/signin", pro: false },
       { name: "Sign Up", path: "/signup", pro: false },
@@ -290,65 +291,52 @@ const AppSidebar: React.FC = () => {
 
   return (
     <aside
-      className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200 
-        ${
-          isExpanded || isMobileOpen
-            ? "w-[290px]"
-            : isHovered
+      className={`fixed top-0 left-0 z-50 mt-16 flex h-screen flex-col border-r border-gray-200 bg-white px-5 text-gray-900 transition-all duration-300 ease-in-out lg:mt-0 dark:border-gray-800 dark:bg-gray-900 ${
+        isExpanded || isMobileOpen
+          ? "w-[290px]"
+          : isHovered
             ? "w-[290px]"
             : "w-[90px]"
-        }
-        ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}
-        lg:translate-x-0`}
+      } ${isMobileOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}
       onMouseEnter={() => !isExpanded && setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className={`py-8 flex  ${
+        className={`flex py-8 ${
           !isExpanded && !isHovered ? "lg:justify-center" : "justify-start"
         }`}
       >
-        <Link href="/">
+        <Link href="/" className="flex w-full items-center justify-center">
           {isExpanded || isHovered || isMobileOpen ? (
-            <>
-              <Image
-                className="dark:hidden"
-                src="/images/logo/logo.svg"
-                alt="Logo"
-                width={150}
-                height={40}
-              />
-              <Image
-                className="hidden dark:block"
-                src="/images/logo/logo-dark.svg"
-                alt="Logo"
-                width={150}
-                height={40}
-              />
-            </>
+            <Image
+              src="/images/logo/logo.png"
+              alt="Surg SAAS"
+              width={70}
+              height={70}
+            />
           ) : (
             <Image
-              src="/images/logo/logo-icon.svg"
-              alt="Logo"
-              width={32}
-              height={32}
+              src="/images/logo/logo.png"
+              alt="Surg SAAS"
+              width={56}
+              height={56}
             />
           )}
         </Link>
       </div>
-      <div className="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">
+      <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
         <nav className="mb-6">
           <div className="flex flex-col gap-4">
             <div>
               <h2
-                className={`mb-4 text-xs uppercase flex leading-[20px] text-gray-400 ${
+                className={`mb-4 flex text-xs leading-[20px] text-gray-400 uppercase ${
                   !isExpanded && !isHovered
                     ? "lg:justify-center"
                     : "justify-start"
                 }`}
               >
                 {isExpanded || isHovered || isMobileOpen ? (
-                  "Menu"
+                  "Training"
                 ) : (
                   <HorizontaLDots />
                 )}
@@ -358,14 +346,14 @@ const AppSidebar: React.FC = () => {
 
             <div className="">
               <h2
-                className={`mb-4 text-xs uppercase flex leading-[20px] text-gray-400 ${
+                className={`mb-4 flex text-xs leading-[20px] text-gray-400 uppercase ${
                   !isExpanded && !isHovered
                     ? "lg:justify-center"
                     : "justify-start"
                 }`}
               >
                 {isExpanded || isHovered || isMobileOpen ? (
-                  "Others"
+                  "Tools & Analytics"
                 ) : (
                   <HorizontaLDots />
                 )}
