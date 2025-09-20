@@ -64,19 +64,19 @@ This surgical training SaaS platform is designed to facilitate comprehensive sur
 For testing the multi-role system, use these demo accounts:
 
 ### Administrator
-- **Email**: admin@surgsaas.com
+- **Email**: admin@mmu.edu
 - **Password**: admin123
-- **Organization**: SurgSaaS Medical Center
+- **Organization**: Metropolitan Medical University
 
 ### Teacher
-- **Email**: teacher@surgsaas.com  
+- **Email**: dr.smith@mmu.edu  
 - **Password**: teacher123
-- **Organization**: SurgSaaS Medical Center
+- **Organization**: Metropolitan Medical University
 
 ### Student
-- **Email**: student@surgsaas.com
+- **Email**: john.doe@student.mmu.edu
 - **Password**: student123
-- **Organization**: SurgSaaS Medical Center
+- **Organization**: Metropolitan Medical University
 
 ## Installation & Setup
 

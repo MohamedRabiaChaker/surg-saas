@@ -11,6 +11,7 @@ export interface User {
   isActive: boolean;
   createdAt: string;
   lastLogin?: string;
+  avatar?: string; // Profile picture URL/path
   // Role-specific fields
   department?: string; // For teachers and admins
   specialization?: string; // For teachers

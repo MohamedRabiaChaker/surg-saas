@@ -24,9 +24,9 @@ export default function SignInForm() {
       const res = await fetch("/api/login", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password }),
       });
 
       if (!res.ok) {
@@ -36,6 +36,10 @@ export default function SignInForm() {
       }
 
       console.log("Login successful");
+
+      // Dispatch login event to update user context
+      window.dispatchEvent(new CustomEvent("user:login"));
+
       router.push("/home");
     } catch {
       setError("Something went wrong. Please try again.");
